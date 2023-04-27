@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Launch uWSGI Python</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="launch-flask-app-with-uwsgi-on-apache2">Launch Flask App with uWSGI on Apache2</h1>
+<p>Install the required things.</p>
+<pre class=" language-sh"><code class="prism  language-sh">sudo apt update
+sudo apt upgrade -y
+sudo apt install apache2 uwsgi libapache2-mod-wsgi-py3 libapache2-mod-ssl
+</code></pre>
+<p>Create Virtual Host:</p>
+<p>Under the following folder <code>/etc/apache2/sites-enabled/</code><br>
+Create a file called <code>myapp.conf</code></p>
+<p>Make sure it ends with <code>.conf</code></p>
+<pre class=" language-conf"><code class="prism  language-conf">&lt;VirtualHost *:80&gt;
+ServerName myapp.local
+
+WSGIDaemonProcess myapp python-home=/path/to/virtualenv python-path=/path/to/myapp
+
+&lt;Directory /path/to/myapp&gt;
+WSGIProcessGroup myapp
+WSGIApplicationGroup %{GLOBAL}
+Require all granted
+&lt;/Directory&gt;
+
+ProxyPass / uwsgi://127.0.0.1:8000/
+ProxyPassReverse / uwsgi://127.0.0.1:8000/
+
+&lt;/VirtualHost&gt;
+</code></pre>
+<p>In your <code>app.py</code></p>
+<pre class=" language-py"><code class="prism  language-py"><span class="token punctuation">.</span>
+<span class="token punctuation">.</span>
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+	app<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">create_app</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> app
+
+uwsgi_app <span class="token operator">=</span> create_app<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Create a uwsgi init file:</p>
+<p>Go to <code>/path/to/myapp</code></p>
+<p>Create a file <code>uwsgi.ini</code><br>
+Enter the following:</p>
+<pre class=" language-ini"><code class="prism  language-ini"><span class="token selector">[uwsgi]</span>
+<span class="token constant">module</span> <span class="token attr-value"><span class="token punctuation">=</span> app</span>
+<span class="token constant">master</span> <span class="token attr-value"><span class="token punctuation">=</span> true</span>
+<span class="token constant">processes</span> <span class="token attr-value"><span class="token punctuation">=</span> 5</span>
+<span class="token constant">vacuum</span> <span class="token attr-value"><span class="token punctuation">=</span> true</span>
+<span class="token constant">chmod-socket</span> <span class="token attr-value"><span class="token punctuation">=</span> 660</span>
+<span class="token constant">socket</span> <span class="token attr-value"><span class="token punctuation">=</span> /tmp/myapp.sock</span>
+<span class="token constant">die-on-term</span> <span class="token attr-value"><span class="token punctuation">=</span> true</span>
+<span class="token constant">env</span> <span class="token attr-value"><span class="token punctuation">=</span> PATH=/path/to/virtualenv/bin</span>
+<span class="token constant">chdir</span> <span class="token attr-value"><span class="token punctuation">=</span> /path/to/app</span>
+<span class="token constant">callable</span> <span class="token attr-value"><span class="token punctuation">=</span> app</span>
+</code></pre>
+<p>Now run it:</p>
+<pre class=" language-sh"><code class="prism  language-sh">uwsgi --ini uwsgi.ini
+</code></pre>
+</div>
+</body>
+
+</html>
