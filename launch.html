@@ -24,6 +24,7 @@ Create a file called <code>myapp.conf</code></p>
 ServerName myapp.local
 
 WSGIDaemonProcess myapp python-home=/path/to/virtualenv python-path=/path/to/myapp
+WSGIScriptAlias / /path/to/app.py process-group=myapp
 
 &lt;Directory /path/to/myapp&gt;
 WSGIProcessGroup myapp
