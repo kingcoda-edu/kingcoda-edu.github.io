@@ -1,0 +1,38 @@
+Here are some templates and tips for prompting an AI assistant efficiently for programming-related questions:
+
+1. Provide context and be specific
+Template: "I'm working on a [project/app description] using [programming language/framework]. I need help with [specific task or problem]."
+Example: "I'm working on a web app using React. I need help with implementing user authentication using JWT tokens."
+
+2. Share relevant code snippets
+Template: "Here's the relevant code snippet: [code snippet]. I'm having trouble with [describe issue]. Can you help me figure out what's wrong?"
+Example: "Here's the relevant code snippet: [paste code]. I'm getting a 'TypeError: Cannot read property 'map' of undefined' error. Can you help me figure out what's causing it?" 
+
+3. Ask for explanations and best practices
+Template: "Can you explain the concept of [programming concept] in [language/framework]? Also, what are some best practices I should follow when implementing it?"
+Example: "Can you explain the concept of closures in JavaScript? Also, what are some best practices I should follow when using them?"
+
+4. Request code reviews and optimizations
+Template: "I've written this code for [task/feature]: [paste code]. Can you review it and suggest any improvements or optimizations?"
+Example: "I've written this Python script to process large CSV files: [paste code]. Can you review it and suggest any performance improvements or optimizations?"
+
+5. Seek debugging assistance
+Template: "I'm getting this error when running my [language] code: [paste error message]. Here's the relevant code: [paste code snippet]. Can you help me debug it?"
+Example: "I'm getting a 'java.lang.NullPointerException' when running my Java program. Here's the relevant code: [paste code snippet]. Can you help me identify and fix the issue?"
+
+6. Ask for code generation
+Template: "Can you provide a [language] code snippet for [specific task or feature]? It should [list requirements or constraints]."
+Example: "Can you provide a Python code snippet for a function that validates an email address? It should use a regular expression and return a boolean value."
+
+7. Seek recommendations and comparisons
+Template: "What's the best [library/framework/tool] for [specific task or requirement] in [language]? Can you compare a few popular options?"
+Example: "What's the best testing framework for unit testing in JavaScript? Can you compare Jest, Mocha, and Jasmine?"
+
+Remember to:
+- Be clear and concise in your prompts
+- Provide necessary context and code snippets
+- Ask specific questions to get targeted answers
+- Clarify requirements and constraints
+- Be open to learning from the AI's suggestions and explanations
+
+By following these templates and tips, you can prompt the AI more effectively for programming-related questions, saving time and improving your efficiency in development tasks.
